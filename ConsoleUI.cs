@@ -5,6 +5,7 @@ public class ConsoleUI
     private AudioPlayer _audioPlayer;
     private ResponseServices _responseService;
     private UserProfile _userProfile;
+
     public ConsoleUI()
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -18,16 +19,31 @@ public class ConsoleUI
         _userProfile.PrintArt();
         _audioPlayer.Greetings();
 
-        Console.WriteLine("Welcome to CyberBot!");
+        // Ask for name
+        Console.Write("Enter your name: ");
+        _userProfile.Name = Console.ReadLine();
+
+        // Pass name to chatbot
+        _responseService.SetUserName(_userProfile.Name);
+
+        Console.WriteLine($"Welcome to CyberBot, {_userProfile.Name}!");
 
         while (true)
         {
-            Console.Write("You:  ");
+            // ✅ Name instead of "You"
+            Console.Write($"{_userProfile.Name}: ");
             string userInput = Console.ReadLine();
 
+            // ✅ Exit condition
+            if (userInput.ToLower().Contains("bye"))
+            {
+                string response = _responseService.GetResponse(userInput);
+                Console.WriteLine("Bot: " + response);
+                break; // ends the app
+            }
 
-            string response = _responseService.GetResponse(userInput);
-            Console.WriteLine("Bot: " + response);
+            string responseNormal = _responseService.GetResponse(userInput);
+            Console.WriteLine("Bot: " + responseNormal);
         }
     }
 }

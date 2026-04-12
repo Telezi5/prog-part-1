@@ -1,7 +1,7 @@
 ﻿using Prog_part_1.Services;
 using System;
-namespace Prog_part_1;
 
+namespace Prog_part_1;
 
 class Program
 {

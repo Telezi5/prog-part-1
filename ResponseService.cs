@@ -5,28 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Prog_part_1.Services
-
-
 {
     public class ResponseServices
     {
+        private string userName = "";   // ✅ NEW
+
+        public void SetUserName(string name)   // ✅ NEW
+        {
+            userName = name;
+        }
+
         public string GetResponse(string respond)
         {
             respond = respond.ToLower();
 
             if (respond.Contains("hello"))
             {
-                return "Hello! Welcome to CyberBot, how are you doing?";
+                return $"Hello {userName}! Welcome to CyberBot, how are you doing?";
             }
             else if (respond.Contains("good"))
             {
-                return "I'm also doing great!";
+                return $"I'm also doing great, {userName}!";
             }
             else if (respond.Contains("what can i ask"))
             {
                 return "You can ask me about passwords ,updates ,backups ,phishing ,social media ,privacy ,public wifi ,downloads ,vpn ,antivirus ,hack ,two factor and safe browsing.";
             }
-
 
             else if (respond.Contains("passwords"))
             {
@@ -95,19 +99,17 @@ namespace Prog_part_1.Services
 
             else if (respond.Contains("thank"))
             {
-                return "You're welcome! Please stay safe online ";
+                return $"You're welcome, {userName}! Please stay safe online ";
             }
 
             else if (respond.Contains("bye"))
             {
-                return "Goodbye! Have a safe and secure day!";
+                return $"Goodbye {userName}! Have a safe and secure day!";
             }
 
             else
-
             {
                 return "I didn't quite understand that. Could you rephrase?";
-
             }
         }
     }
